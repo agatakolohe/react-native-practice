@@ -1,18 +1,25 @@
 import React from "react";
-import { Text, TextInput, View, Image } from "react-native";
+import {
+  Text,
+  TextInput,
+  ScrollView,
+  Image,
+  View,
+  StyleSheet,
+} from "react-native";
 
 const Cat = () => {
   return (
-    <View>
+    <ScrollView>
       <Text>I am also a cat!</Text>
-      <Text>Meow!</Text>
+      <Text style={styles.kitty}>Meow!</Text>
       <Image
         source={{
           uri: "https://geekologie.com/2019/08/28/crazy-maine-coon-cat.jpg",
         }}
         style={{ width: 200, height: 200 }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -26,5 +33,12 @@ const Cafe = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  kitty: {
+    color: "green",
+    fontWeight: "bold",
+    fontSize: 60,
+  },
+});
 
 export default Cafe;

@@ -1,14 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Cafe from "./Cat"
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import Cafe from "./Cat";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>yaasssss??</Text>
-      < Cafe />
-      <StatusBar style="auto" />
+      <ScrollView>
+        <View>
+          <Text style={styles.text}>yaasssss??</Text>
+          <Cafe />
+          <StatusBar style="auto" />
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -16,9 +20,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    paddingTop: "10%",
+    backgroundColor: "darkcyan",
+    color: "green",
+    // color: "red",
+    fontWeight: "bold",
+    fontSize: 60,
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    color: "red",
   },
 });
 
