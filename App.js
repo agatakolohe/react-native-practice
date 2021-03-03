@@ -1,49 +1,50 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createAppContainer } from "react-navigation";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-
-//Start Code Here
-import HomeScreen from "./src/components/Homescreen";
-import AboutScreen from "./src/components/AboutScreen";
-import ContactScreen from "./src/components/ContactScreen";
-
+import { StyleSheet } from "react-native";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./src/screens/HomeScreen";
+import AddCatScreen from "./src/screens/AddCatScreen";
+import { CatsContext } from "./src/screens/CatsContext";
+const Stack = createStackNavigator();
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      possibleCats: ["Lilikoi", "Appa", "Sage"],
+      currentCats: [],
+    };
+  }
+  addCat = (index) => {
+    const { currentCats, possibleCats } = this.state;
+
+    const addedCat = possibleCats.splice(index, 1);
+    currentCats.push(addedCat);
+
+    this.setState({ currentCats, possibleCats });
+  };
   render() {
-    return <AppContainer />;
+    return (
+      <CatsContext.Provider
+        value={{
+          currentCats: this.state.currentCats,
+          possibleCats: this.state.possibleCats,
+          addCat: this.addCat,
+        }}
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Cats" component={AddCatScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </CatsContext.Provider>
+      // <View style={styles.container}>
+      //   <Text>Welcome to our Cat Chat!</Text>
+      // </View>
+    );
   }
 }
-const Drawer = createDrawerNavigator();
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="About" component={AboutScreen} />
-      <Drawer.Screen name="Conact" component={ContactScreen} />
-    </Drawer.Navigator>
-  );
-}
-// const AppNavigator = createDrawerNavigator(
-//   {
-//     Home: {
-//       screen: HomeScreen,
-//     },
-//     About: {
-//       screen: AboutScreen,
-//     },
-//     Contact: {
-//       screen: ContactScreen,
-//     },
-//   },
-//   {
-//     initialRouteName: "Home",
-//     contentOptions: {
-//       activeTintColor: "#e91e63",
-//     },
-//   }
-// );
-
-const AppContainer = createAppContainer(MyDrawer);
 
 const styles = StyleSheet.create({
   container: {
