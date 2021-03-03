@@ -6,7 +6,11 @@ import {
   Image,
   View,
   StyleSheet,
+  Animated,
+  Easing,
+  PanResponder,
 } from "react-native";
+// import IconButton from "./IconButton";
 
 const Cat = () => {
   const [text, setText] = useState("");
@@ -42,6 +46,7 @@ const Cafe = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   kitty: {
     color: "green",
